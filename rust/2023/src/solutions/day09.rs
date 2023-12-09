@@ -8,7 +8,7 @@ pub fn test_input() -> &'static str {
 
 type Report = Vec<Vec<isize>>;
 
-fn extrapolate(report: Report, f: impl Fn(Report) -> isize) -> isize {
+fn extrapolate(report: Report, f: impl Fn(isize, &Vec<isize>) -> isize) -> isize {
     report
         .into_iter()
         .map(|history| {
@@ -22,23 +22,10 @@ fn extrapolate(report: Report, f: impl Fn(Report) -> isize) -> isize {
                     .collect();
                 report.push(history);
             }
-            f(report)
+            #[allow(clippy::redundant_closure)]
+            report.iter().rev().fold(0, |acc, report| f(acc, report))
         })
         .sum()
-}
-
-fn extrapolate_left(report: Report) -> isize {
-    report
-        .iter()
-        .rev()
-        .fold(0, |acc, report| report.first().unwrap() - acc)
-}
-
-fn extrapolate_right(report: Report) -> isize {
-    report
-        .iter()
-        .rev()
-        .fold(0, |acc, report| acc + report.last().unwrap())
 }
 
 pub fn solve(input: &str) -> (isize, isize) {
@@ -46,8 +33,8 @@ pub fn solve(input: &str) -> (isize, isize) {
         .lines()
         .map(|line| line.split(' ').map(|n| n.parse().unwrap()).collect())
         .collect();
-    let right = extrapolate(report.clone(), extrapolate_right);
-    let left = extrapolate(report, extrapolate_left);
+    let right = extrapolate(report.clone(), |acc, report| acc + report.last().unwrap());
+    let left = extrapolate(report, |acc, report| report.first().unwrap() - acc);
     (right, left)
 }
 
