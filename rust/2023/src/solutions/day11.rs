@@ -48,9 +48,8 @@ impl Image {
         }
         let mut cols = HashMap::new();
         for col in 0..pixels[0].len() {
-            #[allow(clippy::needless_range_loop)]
-            for row in 0..pixels.len() {
-                if pixels[row][col] == ('#' as usize) {
+            for row in pixels {
+                if row[col] == ('#' as usize) {
                     cols.insert(col, true);
                     break;
                 }
