@@ -41,7 +41,7 @@ impl From<&Vec<Vec<usize>>> for Graph {
     /// of the edge between it and a neighbor is defined by
     /// the value of the neighbor in the grid.
     fn from(grid: &Vec<Vec<usize>>) -> Self {
-        Self::new(grid, |_, next| next)
+        Self::new(grid, |_, _, next| next)
     }
 }
 
@@ -51,7 +51,7 @@ impl Graph {
     /// of each edge.
     pub fn new<F>(grid: &[Vec<usize>], f: F) -> Self
     where
-        F: Fn(usize, usize) -> usize,
+        F: Fn(usize, (usize, usize), usize) -> usize,
     {
         let width = grid.iter().next().unwrap().len();
         let height = grid.len();
@@ -62,7 +62,7 @@ impl Graph {
                 for edge in super::grid::neighbors((width, height), (row, col), false) {
                     edges.push(Edge {
                         node: width * edge.0 + edge.1,
-                        cost: f(value, grid[edge.0][edge.1]),
+                        cost: f(value, (row, col), grid[edge.0][edge.1]),
                     });
                 }
                 nodes.push(edges);

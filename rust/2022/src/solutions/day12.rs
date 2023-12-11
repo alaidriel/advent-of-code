@@ -10,7 +10,7 @@ pub fn test_input() -> &'static str {
 
 pub fn solve(input: &str) -> (usize, usize) {
     let (starts, end) = endpoints(input);
-    let g = Graph::new(&heights(input), |cur, next| {
+    let g = Graph::new(&heights(input), |cur, _, next| {
         if next as isize - cur as isize > 1 {
             constants::SKIP // we never want to follow this path
         } else {
