@@ -30,7 +30,7 @@ impl Image {
                 }
             }
         }
-        let (rows, cols) = Self::galaxies(&pixels);
+        let (rows, cols) = Self::empty(&pixels);
         Self {
             pixels,
             galaxies,
@@ -39,7 +39,7 @@ impl Image {
         }
     }
 
-    fn galaxies(pixels: &[Vec<usize>]) -> (HashMap<usize, bool>, HashMap<usize, bool>) {
+    fn empty(pixels: &[Vec<usize>]) -> (HashMap<usize, bool>, HashMap<usize, bool>) {
         let mut rows = HashMap::new();
         for (i, row) in pixels.iter().enumerate() {
             if row.contains(&('#' as usize)) {
