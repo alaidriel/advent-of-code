@@ -85,8 +85,8 @@ impl Arrangement {
         self.0
             .iter()
             .enumerate()
-            .flat_map(|(i, bx)| {
-                bx.iter()
+            .flat_map(|(i, b)| {
+                b.iter()
                     .enumerate()
                     .map(move |(j, lens)| (i + 1) * (j + 1) * lens.focal.unwrap())
             })
