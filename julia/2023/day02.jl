@@ -1,3 +1,5 @@
+include("../common/utils.jl")
+
 function maximumCubes(cubeCounts, revealedSet)
     revealed = eachmatch(r"(([0-9]+)\s(red|green|blue))", revealedSet)
     counts = Dict("red" => 0, "green" => 0, "blue" => 0)
@@ -22,13 +24,16 @@ function possibleGame(line)
     id = parse(Int, split(info, " ")[2])
     red, green, blue = foldl(maximumCubes, split(revealedSets, ";"), init=(0, 0, 0))
     possible = red <= 12 && green <= 13 && blue <= 14
-    return if possible
-        id
-    else
-        0
-    end
+    return possible ? id : 0
 end
 
-lines = split(read("2023/inputs/day02.txt", String), "\n")
-@assert reduce(+, map(possibleGame, lines)) == 2551
-@assert reduce(+, map(powerOfCubes, map(fewestCubesNeeded, lines))) == 62811
+partOne = (input) -> reduce(+, map(possibleGame, split(input, "\n")))
+partTwo = (input) -> reduce(+, map(powerOfCubes, map(fewestCubesNeeded, split(input, "\n"))))
+
+common.test(2023, 2,
+    partOne,
+    partTwo,
+    distinct=false,
+    expected=(2551, 62811),
+    testExpected=(8, 2286)
+)

@@ -1,3 +1,5 @@
+include("../common/utils.jl")
+
 mapping = Dict(
     "one" => 1,
     "two" => 2,
@@ -37,6 +39,13 @@ function advancedCalibrationValue(line)
     return parse(Int, string(digits[1]) * string(digits[length(digits)]))
 end
 
-lines = split(read("2023/inputs/day01.txt", String), "\n")
-println(reduce(+, map(calibrationValue, lines)))
-println(reduce(+, map(advancedCalibrationValue, lines)))
+partOne = (input) -> reduce(+, map(calibrationValue, split(input, "\n")))
+partTwo = (input) -> reduce(+, map(advancedCalibrationValue, split(input, "\n")))
+
+common.test(2023, 1,
+    partOne,
+    partTwo,
+    distinct=true,
+    expected=(56397, 55701),
+    testExpected=(142, 281)
+)
