@@ -25,14 +25,11 @@ function advancedCalibrationValue(line)
         current *= ch
         firstMatch = match(r"one|two|three|four|five|six|seven|eight|nine|[0-9]", current)
         if !isnothing(firstMatch)
-            current = ""
             textNum = haskey(mapping, firstMatch.match)
             s = textNum ?
                 mapping[firstMatch.match] :
                 firstMatch.match
-            if textNum
-                current *= firstMatch.match[length(firstMatch.match)]
-            end
+            current = textNum ? firstMatch.match[length(firstMatch.match)] : ""
             append!(digits, s)
         end
     end
