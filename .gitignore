@@ -1,0 +1,4 @@
+# Ignore AoC input files
+input*
+actual
+examples
