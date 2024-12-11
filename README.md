@@ -56,19 +56,20 @@ My solutions for [Advent of Code](https://adventofcode.com/about), an Advent cal
 
 [23-1-Julia]: julia/2023/day01.jl
 [23-2-Julia]: julia/2023/day02.jl
+[23-16-Julia]: julia/2023/day16.jl
 
 |          |          |          |          |          |          |          |
 | -------: | -------: | -------: | -------: | -------: | -------: | -------: |
 |          |          |          | **[1][23-1-Julia]** | **[2][23-2-Julia]** | ~~3~~ | ~~4~~ |
 | ~~5~~ | ~~6~~ | ~~7~~ | ~~8~~ | ~~9~~ | ~~10~~ | ~~11~~ |
-| ~~12~~ | ~~13~~ | ~~14~~ | ~~15~~ | ~~16~~ | ~~17~~ | ~~18~~ |
+| ~~12~~ | ~~13~~ | ~~14~~ | ~~15~~ | **[16][23-16-Julia]** | ~~17~~ | ~~18~~ |
 | ~~19~~ | ~~20~~ | ~~21~~ | ~~22~~ | ~~23~~ | ~~24~~ | ~~25~~ |
 </details>
 
 ## ✨ 2022 ✨
 
 <details>
-  <summary>Rust</summary>
+  <summary>Rust / Python</summary>
 
 [22-1]: rust/2022/src/solutions/day01.rs
 [22-2]: rust/2022/src/solutions/day02.rs
