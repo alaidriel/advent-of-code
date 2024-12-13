@@ -3,7 +3,7 @@ include("../common/utils.jl")
 delta = 0.0001
 
 solveEquations = (input; scale = 0) -> begin
-    nums = parse.(Int, map(m -> m.match, collect(eachmatch(r"\d+", input))))
+    nums = parse.(Int, map(m -> m.match, eachmatch(r"\d+", input)))
     sum(i -> begin
             ax, ay, bx, by, x, y = nums[i:i+5]
             A = [[ax bx]; [ay by]]
