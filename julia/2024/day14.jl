@@ -55,7 +55,7 @@ partOne = input -> begin
 end
 
 partTwo = input -> begin
-    data = transpose(reshape(
+    behavior = transpose(reshape(
         stack(parse.(Int, map(m -> m.match, eachmatch.(r"-?\d+", input))), dims=1),
         (4, :)))
     cols, rows = length(split(input, "\n")) == 12 ? (11, 7) : (101, 103)
@@ -74,7 +74,7 @@ partTwo = input -> begin
     end
     gridFor = times -> begin
         grid = zeros(cols, rows)
-        for (px, py, vx, vy) in eachrow(data)
+        for (px, py, vx, vy) in eachrow(behavior)
             x = mod(px + times * vx, cols)
             y = mod(py + times * vy, rows)
             grid[CartesianIndex(x + 1, y + 1)] += 1
