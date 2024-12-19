@@ -2,10 +2,10 @@ include("../common/utils.jl")
 
 possible = (design, patterns, cache) -> begin
     design == "" && return 1
-    haskey(cache, design) && return cache[design]
-    options = map(pattern -> possible(design[length(pattern)+1:length(design)], patterns, cache),
-        filter(pattern -> startswith(design, pattern), patterns))
-    get!(cache, design, length(options) > 0 ? sum(options) : 0)
+    get!(cache, design) do
+        sum(map(pattern -> possible(design[length(pattern)+1:length(design)], patterns, cache),
+                filter(pattern -> startswith(design, pattern), patterns)), init=0)
+    end
 end
 
 parse = input -> begin
